@@ -305,6 +305,27 @@
       ],
       "status": "building",
       "submittedAt": "2026-03-11"
+    },
+    {
+      "id": "1-sat-to",
+      "name": "1 SAT a...",
+      "description": "1 SAT to... es una aplicación para visualizar en tiempo real el valor de un Satoshi en FIAT, incluyendo gráficos históricos, calculadora y soporte para donaciones vía Lightning Network.",
+      "team": [
+        {
+          "name": "Jona",
+          "github": "unllamas",
+          "role": "Dev/Designer"
+        }
+      ],
+      "repo": "https://github.com/unllamas/1-sat-to",
+      "demo": "https://1-sat-to.vercel.app/",
+      "tech": [
+        "React",
+        "Next",
+        "Lightning"
+      ],
+      "status": "building",
+      "submittedAt": "2026-03-17"
     }
   ],
   "_instructions": {
