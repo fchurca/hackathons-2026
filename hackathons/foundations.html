@@ -621,7 +621,7 @@ async function loadProjects() {
   const grid = document.getElementById('projectsGrid');
   
   try {
-    const response = await fetch('/data/projects/foundations.json');
+    const response = await fetch('/data/projects/foundations.json?v=' + Date.now());
     const data = await response.json();
     
     if (!data.projects || data.projects.length === 0) {
