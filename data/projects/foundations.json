@@ -372,7 +372,7 @@
             }
          ],
          "repo":"https://github.com/fchurca/nosteach",
-         "demo":"",
+         "demo":"https://nosteach.vercel.app/",
          "tech":[
             "Alby SDK",
             "NWC",
