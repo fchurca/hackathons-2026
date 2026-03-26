@@ -233,7 +233,7 @@
         }
       ],
       "repo": "https://github.com/wapu-app/wapu-cli",
-      "demo": "",
+      "demo": "https://wapu.shiafu.com/",
       "tech": [
         "Python",
         "Lightning Address"
@@ -278,7 +278,7 @@
         }
       ],
       "repo": "https://github.com/landaverdend/stacktris",
-      "demo": "https://github.com/landaverdend/stacktris",
+      "demo": "https://stacktris.app/",
       "tech": [
         "React",
         "TypeScript",
@@ -316,33 +316,9 @@
       "pitched_final": "https://www.youtube.com/watch?v=W9Fw72-jFX0&t=2583s"
     },
     {
-      "id": "sweet-shots",
-      "name": "Sweet Shots",
-      "description": "E-commerce de postres artesanales con pagos Lightning. Guest checkout sin login, persistencia en Supabase, notificaciones de pedidos en tiempo real.",
-      "team": [
-        {
-          "name": "Lalo",
-          "github": "Lalo1821",
-          "role": "Lead Dev"
-        }
-      ],
-      "repo": "https://github.com/Lalo1821/sweet-shots",
-      "demo": "https://sweet-shots.vercel.app",
-      "tech": [
-        "JavaScript",
-        "Lightning",
-        "NWC",
-        "Supabase",
-        "Vercel"
-      ],
-      "status": "building",
-      "submittedAt": "2026-03-24",
-      "pitched_final": "https://www.youtube.com/watch?v=W9Fw72-jFX0&t=3853s"
-    },
-    {
       "id": "1-sat-to",
       "name": "1 SAT a...",
-      "description": "Aplicación para visualizar en tiempo real el valor de un Satoshi en FIAT, con gráficos históricos, calculadora y donaciones vía Lightning Network.",
+      "description": "1 SAT to... es una aplicación para visualizar en tiempo real el valor de un Satoshi en FIAT, incluyendo gráficos históricos, calculadora y soporte para donaciones vía Lightning Network.",
       "team": [
         {
           "name": "Jona",
@@ -364,7 +340,7 @@
     {
       "id": "openwork",
       "name": "openWork",
-      "description": "Contratos entre agentes para intercambiar trabajo por satoshis de Lightning Network.",
+      "description": "establece un contrato entre un agente con otro agente para que uno haga un trabajo para el otro contra una contraprestacion usando satoshis de LN",
       "team": [
         {
           "name": "naranja",
@@ -372,13 +348,14 @@
           "role": "Lead Dev"
         }
       ],
+      "repo": "https://github.com/soyezequiel/agentic-economy",
       "status": "idea",
       "submittedAt": "2026-03-17"
     },
     {
       "id": "life-action-plan",
       "name": "Life Action Plan (LAP)",
-      "description": "Asistente personal offline-first con IA para crear, simular y refinar planes de vida. Micro-pagos por token mediante Lightning Network.",
+      "description": "Asistente personal offline-first que usa IA para crear, simular y refinar planes de vida y rutinas diarias, garantizando privacidad extrema y habilitando micro-pagos por token mediante Lightning Network.",
       "team": [
         {
           "name": "naranja",
@@ -386,14 +363,15 @@
           "role": "Lead Dev"
         }
       ],
-      "status": "building",
+      "repo": "https://github.com/soyezequiel/life-action-plan",
+      "status": "idea",
       "submittedAt": "2026-03-18",
       "pitched_final": "https://www.youtube.com/watch?v=W9Fw72-jFX0&t=4457s"
     },
     {
       "id": "nosteach",
       "name": "NosTeach",
-      "description": "Plataforma educativa descentralizada sobre Nostr. Patrocinios Lightning: alumnos pagan, maestros premian, mecenas becan. Todo vía Lightning.",
+      "description": "Plataforma educativa descentralizada. MVP: Patrocinios Lightning para cursos. Alumnos pagan cursos, profesores premian alumnos, patrocinadores becan ambos. Todo via Lightning.",
       "team": [
         {
           "name": "Fred",
@@ -406,17 +384,40 @@
           "role": "Dev"
         }
       ],
-      "repo": "",
-      "demo": "",
+      "repo": "https://github.com/fchurca/nosteach",
+      "demo": "https://nosteach.vercel.app/",
       "tech": [
         "Alby SDK",
         "NWC",
-        "Nostr",
         "Vite"
       ],
       "status": "building",
       "submittedAt": "2026-03-17",
       "pitched_final": "https://www.youtube.com/watch?v=W9Fw72-jFX0&t=4103s"
+    },
+    {
+      "id": "sweet-shots",
+      "name": "Sweet Shots",
+      "description": "E-commerce de postres artesanales con pagos nativos Lightning Network. Login sin email via Nostr (NIP-07), catálogo con precios dual USD+sats en tiempo real, programa de fidelidad nativo en sats y descuento del 5% por pagar con Bitcoin.",
+      "team": [
+        {
+          "name": "Lalo1821",
+          "github": "Lalo1821",
+          "role": "Lead Dev"
+        }
+      ],
+      "repo": "https://github.com/Lalo1821/sweet-shots",
+      "demo": "https://sweet-shots.vercel.app",
+      "tech": [
+        "Lightning Address",
+        "Nostr NIP-07",
+        "WebLN",
+        "Alby SDK",
+        "Vite",
+        "Vanilla JS"
+      ],
+      "status": "building",
+      "submittedAt": "2026-03-18"
     }
   ],
   "_instructions": {
