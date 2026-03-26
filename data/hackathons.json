@@ -30,10 +30,10 @@
       "tags": ["Lightning"],
       "topics": ["Invoices & Payments", "Wallets & Keys", "APIs & SDKs", "Dev Tools"],
       "dates": [
-        { "date": "2026-03-03", "day": 3, "type": "apertura", "title": "Community Call — Apertura", "description": "Se abre el formulario de inscripción. Podés anotarte solo o en grupo (máx 4 personas)." },
-        { "date": "2026-03-10", "day": 10, "type": "pitch", "title": "Community Call — Pitches", "description": "Presentá tu proyecto en 3 minutos. Recibí feedback de la comunidad y los mentores." },
-        { "date": "2026-03-17", "day": 17, "type": "cierre", "title": "Community Call — Cierre inscripciones", "description": "Último día para inscribirte con un proyecto completo." },
-        { "date": "2026-03-24", "day": 24, "type": "pitch-final", "title": "Community Call — Pitch Final", "description": "Últimos pitches antes de la entrega. Feedback final de mentores." },
+        { "date": "2026-03-03", "day": 3, "type": "apertura", "title": "Community Call — Apertura", "description": "Se abre el formulario de inscripción. Podés anotarte solo o en grupo (máx 4 personas).", "youtube": "https://www.youtube.com/watch?v=RKUlQi-Uja8" },
+        { "date": "2026-03-10", "day": 10, "type": "pitch", "title": "Community Call — Pitches", "description": "Presentá tu proyecto en 3 minutos. Recibí feedback de la comunidad y los mentores.", "youtube": "https://www.youtube.com/watch?v=3sXD0EWWEdo" },
+        { "date": "2026-03-17", "day": 17, "type": "cierre", "title": "Community Call — Cierre inscripciones", "description": "Último día para inscribirte con un proyecto completo.", "youtube": "https://www.youtube.com/watch?v=XNOSG2ngm0c" },
+        { "date": "2026-03-24", "day": 24, "type": "pitch-final", "title": "Community Call — Pitch Final", "description": "Últimos pitches antes de la entrega. Feedback final de mentores.", "youtube": "https://www.youtube.com/watch?v=W9Fw72-jFX0" },
         { "date": "2026-03-31", "day": 31, "type": "premios", "title": "Community Call — Entrega de premios", "description": "El jurado AI evalúa los proyectos. Anuncio de ganadores en vivo." }
       ]
     },

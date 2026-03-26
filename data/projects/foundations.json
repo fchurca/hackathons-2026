@@ -316,9 +316,9 @@
       "pitched_final": "https://www.youtube.com/watch?v=W9Fw72-jFX0&t=2583s"
     },
     {
-      "id": "beyond-shots",
-      "name": "Beyond Shots",
-      "description": "E-commerce de postres artesanales con pagos Lightning Network. Carrito de compras, sistema de puntos de fidelidad, y cobro directo en sats.",
+      "id": "sweet-shots",
+      "name": "Sweet Shots",
+      "description": "E-commerce de postres artesanales con pagos Lightning. Guest checkout sin login, persistencia en Supabase, notificaciones de pedidos en tiempo real.",
       "team": [
         {
           "name": "Lalo",
@@ -326,12 +326,14 @@
           "role": "Lead Dev"
         }
       ],
-      "repo": "",
-      "demo": "",
+      "repo": "https://github.com/Lalo1821/sweet-shots",
+      "demo": "https://sweet-shots.vercel.app",
       "tech": [
+        "JavaScript",
         "Lightning",
-        "E-commerce",
-        "NWC"
+        "NWC",
+        "Supabase",
+        "Vercel"
       ],
       "status": "building",
       "submittedAt": "2026-03-24",
