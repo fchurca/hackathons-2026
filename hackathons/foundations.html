@@ -9,22 +9,26 @@
 <link rel="stylesheet" href="../css/styles.css">
 <link rel="stylesheet" href="../css/hackathon-detail.css">
 <style>
-  .projects-list { display: flex; flex-direction: column; gap: 8px; }
+  .projects-list { display: flex; flex-direction: column; gap: 8px; width: 100%; }
   .project-list-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 14px 20px; border-radius: 10px;
+    display: grid; grid-template-columns: 120px 1fr auto; align-items: center; gap: 16px;
+    padding: 16px 24px; border-radius: 10px; width: 100%;
     background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
     transition: all 0.2s;
   }
   .project-list-item:hover { background: rgba(255,200,0,0.04); border-color: rgba(255,200,0,0.2); }
-  .project-list-info { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .project-list-status { font-size: 0.75rem; color: rgba(255,255,255,0.5); min-width: 100px; }
-  .project-list-name { font-weight: 600; color: #fff; text-decoration: none; font-size: 1rem; }
+  .project-list-status { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+  .project-list-info { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+  .project-list-name { font-weight: 600; color: #fff; text-decoration: none; font-size: 1rem; white-space: nowrap; }
   .project-list-name:hover { color: #ffc800; }
-  .project-list-team { font-size: 0.85rem; color: rgba(255,255,255,0.35); }
-  .project-list-links { display: flex; gap: 12px; flex-shrink: 0; }
+  .project-list-team { font-size: 0.85rem; color: rgba(255,255,255,0.35); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .project-list-links { display: flex; gap: 16px; flex-shrink: 0; }
   .project-list-link { font-size: 0.8rem; color: #ffc800; text-decoration: none; opacity: 0.7; }
   .project-list-link:hover { opacity: 1; }
+  @media (max-width: 640px) {
+    .project-list-item { grid-template-columns: 1fr; gap: 8px; }
+    .project-list-links { justify-content: flex-start; }
+  }
 </style>
 <style>
 .hackathon-hero {
@@ -796,8 +800,8 @@ async function loadProjects() {
       
       html += `
         <div class="project-list-item">
+          <span class="project-list-status">${statusLabel}</span>
           <div class="project-list-info">
-            <span class="project-list-status">${statusLabel}</span>
             <a href="${repoUrl}" target="_blank" class="project-list-name">${project.name}</a>
             <span class="project-list-team">${teamNames}</span>
           </div>
