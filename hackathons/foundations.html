@@ -794,8 +794,15 @@ async function loadProjects() {
       'finalist': 'finalist'
     };
     
-    const order = ['official', 'winner', 'finalist', 'submitted', 'building', 'idea'];
-    data.projects.sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status));
+    // Filter out Lightning Starter Kit and sort by score descending
+    data.projects = data.projects.filter(p => p.status !== 'official');
+    data.projects.sort((a, b) => {
+      const slugA = (a.repo || '').split('/').pop().replace(/\/$/, '');
+      const slugB = (b.repo || '').split('/').pop().replace(/\/$/, '');
+      const scoreA = finalScores[slugA] || 0;
+      const scoreB = finalScores[slugB] || 0;
+      return scoreB - scoreA;
+    });
     
     // Final scores by repo slug (multiple case variants for safety)
     const finalScores = {
