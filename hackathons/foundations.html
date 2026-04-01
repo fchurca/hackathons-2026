@@ -791,20 +791,48 @@ async function loadProjects() {
     const order = ['official', 'winner', 'finalist', 'submitted', 'building', 'idea'];
     data.projects.sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status));
     
+    // Map project repo slugs to report slugs
+    const reportSlugMap = {
+      'proof-of-attendance-hdmp': 'proof-of-attendance',
+      'sat-lotto-v2': 'satlotto-v2',
+      'bitbybit-habits': 'bitbybit',
+      'Streamsats': 'streamsats',
+      'hash21-shop': 'hash21-shop',
+      'anirayo': 'anirayo',
+      'digital-card': 'digital-card',
+      'wapu-cli': 'wapu-cli',
+      'relam-pago': 'relampago',
+      'stacktris': 'stacktris',
+      'SatsParty': 'satsparty',
+      '1-sat-to': '1-sat-to',
+      'openwork': 'openwork',
+      'life-action-plan': 'life-action-plan',
+      'nosteach': 'nosteach',
+      'sweet-shots': 'sweet-shots',
+      'lightning-starter': null
+    };
+    
     let html = '<div class="projects-list">';
     data.projects.forEach(project => {
       const statusLabel = statusLabels[project.status] || project.status;
       const repoUrl = project.repo || '#';
       const demoUrl = project.demo || '';
       const teamNames = project.team.map(m => m.name).join(', ');
+      const repoSlug = repoUrl.split('/').pop() || '';
+      const reportSlug = reportSlugMap[repoSlug];
+      const reportUrl = reportSlug ? `foundations/reports.html?report=${reportSlug}` : null;
       
       html += `
         <div class="project-list-item">
           <div class="project-list-info">
-            <a href="${repoUrl}" target="_blank" class="project-list-name">${project.name}</a>
+            ${reportUrl 
+              ? `<a href="${reportUrl}" class="project-list-name">${project.name}</a>`
+              : `<span class="project-list-name" style="color:rgba(255,255,255,0.5)">${project.name}</span>`
+            }
             <span class="project-list-team">${teamNames}</span>
           </div>
           <div class="project-list-links">
+            ${reportUrl ? `<a href="${reportUrl}" class="project-list-link">📊 Reporte</a>` : ''}
             <a href="${repoUrl}" target="_blank" class="project-list-link">GitHub</a>
             ${demoUrl ? `<a href="${demoUrl}" target="_blank" class="project-list-link">Demo</a>` : ''}
           </div>
