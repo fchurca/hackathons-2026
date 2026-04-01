@@ -9,6 +9,24 @@
 <link rel="stylesheet" href="../css/styles.css">
 <link rel="stylesheet" href="../css/hackathon-detail.css">
 <style>
+  .projects-list { display: flex; flex-direction: column; gap: 8px; }
+  .project-list-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px; border-radius: 10px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.2s;
+  }
+  .project-list-item:hover { background: rgba(255,200,0,0.04); border-color: rgba(255,200,0,0.2); }
+  .project-list-info { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .project-list-status { font-size: 0.75rem; color: rgba(255,255,255,0.5); min-width: 100px; }
+  .project-list-name { font-weight: 600; color: #fff; text-decoration: none; font-size: 1rem; }
+  .project-list-name:hover { color: #ffc800; }
+  .project-list-team { font-size: 0.85rem; color: rgba(255,255,255,0.35); }
+  .project-list-links { display: flex; gap: 12px; flex-shrink: 0; }
+  .project-list-link { font-size: 0.8rem; color: #ffc800; text-decoration: none; opacity: 0.7; }
+  .project-list-link:hover { opacity: 1; }
+</style>
+<style>
 .hackathon-hero {
   padding: 120px 0 60px;
   background: linear-gradient(135deg, #0a0f1a 0%, #1a1a2e 50%, #16213e 100%);
@@ -400,7 +418,6 @@
     
     <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
       <a href="foundations/reports.html" class="btn btn-primary btn-glow" style="font-size: 1.1rem; padding: 14px 32px;">🏆 Ver Resultados</a>
-      <a href="como-participar.html" class="btn btn-outline">🚀 Cómo participar</a>
     </div>
   </div>
 </section>
@@ -435,10 +452,7 @@
       <span class="section-label">Proyectos</span>
       <h2 class="section-title" id="projectsSectionTitle">Participando en ...</h2>
       <p class="section-description">
-        Proyectos inscriptos en esta hackathon. 
-        <a href="#" id="projectsPrLink" target="_blank" class="add-project-link">
-          ¿Querés agregar el tuyo? Hacé un PR →
-        </a>
+        Proyectos que participaron en esta hackathon.
       </p>
     </div>
     
@@ -773,55 +787,38 @@ async function loadProjects() {
     const order = ['official', 'winner', 'finalist', 'submitted', 'building', 'idea'];
     data.projects.sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status));
     
-    let html = '';
+    let html = '<div class="projects-list">';
     data.projects.forEach(project => {
-      const statusClass = statusClasses[project.status] || '';
       const statusLabel = statusLabels[project.status] || project.status;
       const repoUrl = project.repo || '#';
       const demoUrl = project.demo || '';
+      const teamNames = project.team.map(m => m.name).join(', ');
       
       html += `
-        <a href="${repoUrl}" target="_blank" class="project-card ${statusClass}">
-          <div class="project-status">${statusLabel}</div>
-          <h3 class="project-name">${project.name}</h3>
-          <p class="project-description">${project.description}</p>
-          ${project.tech && project.tech.length > 0 ? `
-            <div class="project-tech">
-              ${project.tech.slice(0, 4).map(t => `<span>${t}</span>`).join('')}
-            </div>
-          ` : ''}
-          <div class="project-team">
-            ${project.team.map(m => `<span class="team-member">👤 ${m.name}</span>`).join('')}
+        <div class="project-list-item">
+          <div class="project-list-info">
+            <span class="project-list-status">${statusLabel}</span>
+            <a href="${repoUrl}" target="_blank" class="project-list-name">${project.name}</a>
+            <span class="project-list-team">${teamNames}</span>
           </div>
-          <div class="project-links">
-            <span class="project-link">Ver en GitHub →</span>
-            ${demoUrl ? `<span class="project-link demo-link" onclick="event.preventDefault(); window.open('${demoUrl}', '_blank')">🌐 Demo</span>` : ''}
+          <div class="project-list-links">
+            <a href="${repoUrl}" target="_blank" class="project-list-link">GitHub</a>
+            ${demoUrl ? `<a href="${demoUrl}" target="_blank" class="project-list-link">Demo</a>` : ''}
           </div>
-        </a>
+        </div>
       `;
     });
     
-    html += buildPlaceholderCard();
+    html += '</div>';
     grid.innerHTML = html;
     
   } catch (error) {
     console.error('Error loading projects:', error);
-    grid.innerHTML = buildPlaceholderCard();
+    grid.innerHTML = '<p style="color:rgba(255,255,255,0.4);">No se pudieron cargar los proyectos.</p>';
   }
 }
 
-function buildPlaceholderCard() {
-  return `
-    <div class="project-card placeholder">
-      <div class="placeholder-icon">➕</div>
-      <h3 class="project-name">Tu proyecto acá</h3>
-      <p class="project-description">Agregá tu proyecto haciendo un PR al repositorio.</p>
-      <a href="https://github.com/lacrypta/hackathons-2026/edit/main/data/projects/${HACKATHON_ID}.json" target="_blank" class="btn btn-outline btn-small">
-        Agregar proyecto
-      </a>
-    </div>
-  `;
-}
+
 
 // ─────────────────────────────────────────────
 // Main: cargar todo desde hackathons.json
@@ -840,13 +837,14 @@ async function loadHackathonData() {
 
     renderHero(hackathon, totalSats);
     renderPrizes(distribution, totalSats);
-    renderCalendar(hackathon.dates, totalSats, `${hackathon.month} ${hackathon.year}`);
+    // Calendar removed for completed hackathon
+    // renderCalendar(hackathon.dates, totalSats, `${hackathon.month} ${hackathon.year}`);
     renderTopics(hackathon.topics, hackathon.focus);
 
   } catch (error) {
     console.error('Error cargando datos de hackathon:', error);
     const errMsg = `<p style="color: rgba(255,100,100,0.8); text-align:center; padding:20px;">Error cargando datos: ${error.message}</p>`;
-    ['prizesGrid', 'calendarGrid', 'topicsGrid'].forEach(id => {
+    ['prizesGrid', 'topicsGrid'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.innerHTML = errMsg;
     });
