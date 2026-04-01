@@ -3,14 +3,346 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IDENTITY — Lightning Hackathon #2 | La Crypta</title>
-<meta name="description" content="Segunda hackathon del programa. Nostr Identity & Social. Abril 2026.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔐</text></svg>">
+<title id="pageTitle">Cargando... | La Crypta</title>
+<meta name="description" id="pageDescription" content="Lightning Hackathon — La Crypta">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 <link rel="stylesheet" href="../css/styles.css">
 <link rel="stylesheet" href="../css/hackathon-detail.css">
+<style>
+.hackathon-hero {
+  padding: 120px 0 60px;
+  background: linear-gradient(135deg, #0a0f1a 0%, #1a1a2e 50%, #16213e 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hackathon-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 200, 0, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+}
+.hackathon-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.hackathon-number {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #ffc800;
+  line-height: 1;
+}
+.hackathon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 200, 0, 0.15);
+  border: 1px solid rgba(255, 200, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  color: #ffc800;
+  margin-bottom: 20px;
+}
+.hackathon-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #fff 0%, #ffc800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hackathon-focus {
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 20px;
+}
+.hackathon-meta {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.meta-label {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.meta-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Calendar Section */
+.calendar-section {
+  padding: 80px 0;
+  background: #0d1117;
+}
+.calendar-grid {
+  display: grid;
+  gap: 20px;
+  margin-top: 40px;
+}
+.calendar-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 30px;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+.calendar-item:hover {
+  border-color: rgba(255, 200, 0, 0.3);
+  transform: translateX(10px);
+}
+.calendar-item.active {
+  border-color: #00ff9d;
+  background: linear-gradient(135deg, rgba(0,255,157,0.05) 0%, rgba(0,255,157,0.02) 100%);
+}
+.calendar-item.completed {
+  opacity: 0.6;
+}
+.calendar-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 200, 0, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+}
+.calendar-day {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffc800;
+  line-height: 1;
+}
+.calendar-month {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.calendar-weekday {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 5px;
+}
+.calendar-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.calendar-content p {
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+.calendar-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(255, 200, 0, 0.15);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: #ffc800;
+  margin-top: 15px;
+}
+.calendar-tag.deadline {
+  background: rgba(255, 100, 100, 0.15);
+  color: #ff6b6b;
+}
+.calendar-tag.prizes {
+  background: rgba(0, 255, 157, 0.15);
+  color: #00ff9d;
+}
+.calendar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ff0000;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 12px;
+  margin-right: 15px;
+  padding: 6px 12px;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.calendar-link:hover {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff3333;
+}
+
+/* Prizes Section */
+.prizes-section {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #0d1117 0%, #0a0f1a 100%);
+}
+.prizes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+.prize-card {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+.prize-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 200, 0, 0.3);
+}
+.prize-card.gold {
+  border-color: rgba(255, 215, 0, 0.4);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.02) 100%);
+}
+.prize-card.silver {
+  border-color: rgba(192, 192, 192, 0.4);
+  background: linear-gradient(135deg, rgba(192, 192, 192, 0.1) 0%, rgba(192, 192, 192, 0.02) 100%);
+}
+.prize-card.bronze {
+  border-color: rgba(205, 127, 50, 0.4);
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.1) 0%, rgba(205, 127, 50, 0.02) 100%);
+}
+.prize-position {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.prize-place {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 15px;
+}
+.prize-amount {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #ffc800;
+}
+.prize-unit {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+}
+.prizes-total {
+  text-align: center;
+  margin-top: 40px;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(0, 255, 157, 0.1) 0%, rgba(0, 255, 157, 0.02) 100%);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+  border-radius: 16px;
+}
+.prizes-total-label {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+}
+.prizes-total-amount {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #00ff9d;
+}
+.prizes-total-unit {
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.7);
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 80px 0;
+  text-align: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+.cta-section p {
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  margin-bottom: 30px;
+  transition: color 0.3s ease;
+}
+.back-link:hover {
+  color: #ffc800;
+}
+
+/* Topics */
+.topics-section {
+  padding: 80px 0;
+  background: #0a0f1a;
+}
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+.topic-card {
+  padding: 25px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+.topic-card h4 {
+  color: #ffc800;
+  margin-bottom: 10px;
+}
+.topic-card p {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .hackathon-title {
+    font-size: 2.5rem;
+  }
+  .calendar-item {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .calendar-date {
+    flex-direction: row;
+    gap: 15px;
+    justify-content: flex-start;
+  }
+  .prizes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
 </head>
 <body>
 
+<!-- Navbar -->
 <nav class="navbar">
   <div class="nav-container">
     <a href="https://hackaton.lacrypta.ar" class="nav-logo">
@@ -21,84 +353,536 @@
       <a href="../hackathons.html">Hackathons</a>
       <a href="#calendario">Calendario</a>
       <a href="#premios">Premios</a>
-      <button class="btn btn-nav" data-tally-open="9qDNEY" data-tally-layout="modal" data-tally-width="600">Inscribirme</button>
+      <button class="btn btn-nav" data-tally-open="9qDNEY" data-tally-layout="modal" data-tally-width="600">
+        Inscribirme
+      </button>
     </div>
     <button class="nav-toggle" onclick="toggleMenu()">☰</button>
   </div>
 </nav>
 
+<!-- Hero -->
 <section class="hackathon-hero">
   <div class="container">
     <a href="../hackathons.html" class="back-link">← Volver a Hackathons</a>
-    <div class="hackathon-badge"><span>🔐</span><span>Hackathon #2 · Abril 2026</span></div>
-    <div class="hackathon-header"><span class="hackathon-number">#2</span></div>
-    <h1 class="hackathon-title">IDENTITY</h1>
-    <p class="hackathon-focus">Nostr Identity & Social</p>
-    <p style="color: rgba(255,255,255,0.7); max-width: 600px; line-height: 1.6;">
-      Perfiles, keys, relays. Identidad descentralizada. Construí aplicaciones sobre Nostr.
+    
+    <div class="hackathon-badge" id="hackathonBadge">
+      <span id="hackathonIcon">⚡</span>
+      <span id="hackathonBadgeText">Hackathon · ...</span>
+    </div>
+    
+    <div class="hackathon-header">
+      <span class="hackathon-number" id="hackathonNumber">#</span>
+    </div>
+    
+    <h1 class="hackathon-title" id="hackathonName">...</h1>
+    <p class="hackathon-focus" id="hackathonFocus">...</p>
+    <p style="color: rgba(255,255,255,0.7); max-width: 600px; line-height: 1.6;" id="hackathonDescription">
+      Cargando...
     </p>
+    
     <div class="hackathon-meta">
-      <div class="meta-item"><span class="meta-label">Dificultad</span><span class="meta-value">⭐ Beginner</span></div>
-      <div class="meta-item"><span class="meta-label">Duración</span><span class="meta-value">4 semanas</span></div>
-      <div class="meta-item"><span class="meta-label">Premio total</span><span class="meta-value" style="color: #ffc800;">1,000,000 sats</span></div>
-      <div class="meta-item"><span class="meta-label">Formato</span><span class="meta-value">Híbrido</span></div>
+      <div class="meta-item">
+        <span class="meta-label">Dificultad</span>
+        <span class="meta-value" id="hackathonDifficulty">...</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Duración</span>
+        <span class="meta-value">4 semanas</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Premio total</span>
+        <span class="meta-value" style="color: #ffc800;" id="hackathonPrizeTotal">...</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Formato</span>
+        <span class="meta-value">Híbrido</span>
+      </div>
+    </div>
+    
+    <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+      <a href="identity/reports.html" class="btn btn-primary btn-glow" style="font-size: 1.1rem; padding: 14px 32px;">🏆 Ver Resultados</a>
+      <a href="como-participar.html" class="btn btn-outline">🚀 Cómo participar</a>
     </div>
   </div>
 </section>
 
+<!-- Premios -->
+<section class="prizes-section" id="premios">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Los premios</span>
+      <h2 class="section-title" id="prizesSectionTitle">... sats en juego</h2>
+      <p class="section-description">
+        Bitcoin real pagado vía Lightning Network.
+      </p>
+    </div>
+    
+    <div class="prizes-grid" id="prizesGrid">
+      <div style="color: rgba(255,255,255,0.5); grid-column: 1/-1; text-align:center; padding: 40px;">Cargando premios...</div>
+    </div>
+    
+    <div class="prizes-total" id="prizesTotal" style="display:none;">
+      <div class="prizes-total-label">Premio total de la hackathon</div>
+      <div class="prizes-total-amount" id="prizesTotalAmount">...</div>
+      <div class="prizes-total-unit">sats</div>
+    </div>
+  </div>
+</section>
+
+<!-- Proyectos -->
+<section class="projects-section" id="proyectos">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Proyectos</span>
+      <h2 class="section-title" id="projectsSectionTitle">Participando en ...</h2>
+      <p class="section-description">
+        Proyectos inscriptos en esta hackathon. 
+        <a href="#" id="projectsPrLink" target="_blank" class="add-project-link">
+          ¿Querés agregar el tuyo? Hacé un PR →
+        </a>
+      </p>
+    </div>
+    
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Proyectos se cargan dinámicamente -->
+      <div class="loading-projects">Cargando proyectos...</div>
+    </div>
+  </div>
+</section>
+
+<!-- Calendario -->
 <section class="calendar-section" id="calendario">
   <div class="container">
     <div class="section-header">
       <span class="section-label">El calendario</span>
-      <h2 class="section-title">Abril 2026</h2>
-      <p class="section-description">4 martes. Cada semana avanzás en tu proyecto.</p>
+      <h2 class="section-title" id="calendarSectionTitle">...</h2>
+      <p class="section-description">
+        Community Calls semanales. Pitches y feedback en vivo.
+      </p>
     </div>
-    <div class="calendar-grid">
-      <div class="calendar-item"><div class="calendar-date"><span class="calendar-day">7</span><span class="calendar-month">ABR</span><span class="calendar-weekday">Martes</span></div><div class="calendar-content"><h3>🚀 Community Call — Apertura</h3><p>Se abre el formulario de inscripción. Podés anotarte solo o en grupo (máx 4 personas).</p><a href="https://www.youtube.com/@LaCryptaOk" target="_blank" class="calendar-link">📺 Ver en YouTube</a><span class="calendar-tag">Inscripciones abiertas</span></div></div>
-      <div class="calendar-item"><div class="calendar-date"><span class="calendar-day">14</span><span class="calendar-month">ABR</span><span class="calendar-weekday">Martes</span></div><div class="calendar-content"><h3>🎤 Community Call — Pitches</h3><p>Presentá tu proyecto en 3 minutos. Recibí feedback de la comunidad y los mentores.</p><a href="https://www.youtube.com/@LaCryptaOk" target="_blank" class="calendar-link">📺 Ver en YouTube</a><span class="calendar-tag">Pitch + Feedback</span></div></div>
-      <div class="calendar-item"><div class="calendar-date"><span class="calendar-day">21</span><span class="calendar-month">ABR</span><span class="calendar-weekday">Martes</span></div><div class="calendar-content"><h3>🔒 Community Call — Cierre inscripciones</h3><p>Último día para inscribirte con un proyecto completo.</p><a href="https://www.youtube.com/@LaCryptaOk" target="_blank" class="calendar-link">📺 Ver en YouTube</a><span class="calendar-tag deadline">Deadline inscripción</span></div></div>
-      <div class="calendar-item"><div class="calendar-date"><span class="calendar-day">28</span><span class="calendar-month">ABR</span><span class="calendar-weekday">Martes</span></div><div class="calendar-content"><h3>🏆 Community Call — Entrega de premios</h3><p>El jurado AI evalúa los proyectos. Anuncio de ganadores en vivo.</p><a href="https://www.youtube.com/@LaCryptaOk" target="_blank" class="calendar-link">📺 Ver en YouTube</a><span class="calendar-tag prizes">1,000,000 sats en premios</span></div></div>
+    
+    <div class="calendar-grid" id="calendarGrid">
+      <div style="color: rgba(255,255,255,0.5); text-align:center; padding: 40px;">Cargando calendario...</div>
     </div>
   </div>
 </section>
 
+<!-- Topics -->
 <section class="topics-section">
   <div class="container">
-    <div class="section-header"><span class="section-label">Qué vas a aprender</span><h2 class="section-title">Nostr Basics</h2></div>
-    <div class="topics-grid">
-      <div class="topic-card"><h4>🔑 Keys & Signing</h4><p>Generación de keys, firmas, verificación. El core de Nostr.</p></div>
-      <div class="topic-card"><h4>👤 Profiles & Metadata</h4><p>NIP-01, perfiles, metadata, display names.</p></div>
-      <div class="topic-card"><h4>📡 Relays</h4><p>Conexión a relays, publicación, suscripción a eventos.</p></div>
-      <div class="topic-card"><h4>📝 NIP-01 Basics</h4><p>Eventos básicos, kinds, tags, filtros.</p></div>
+    <div class="section-header">
+      <span class="section-label">Qué vas a aprender</span>
+      <h2 class="section-title" id="topicsSectionTitle">Lightning Basics</h2>
+    </div>
+    
+    <div class="topics-grid" id="topicsGrid">
+      <div style="color: rgba(255,255,255,0.5); grid-column: 1/-1; text-align:center; padding: 40px;">Cargando topics...</div>
     </div>
   </div>
 </section>
 
-<section class="prizes-section" id="premios">
-  <div class="container">
-    <div class="section-header"><span class="section-label">Los premios</span><h2 class="section-title">1,000,000 sats en juego</h2><p class="section-description">6 posiciones premiadas. Bitcoin real pagado vía Lightning Network.</p></div>
-    <div class="prizes-grid">
-      <div class="prize-card gold"><div class="prize-position">🥇</div><div class="prize-place">1er lugar</div><div class="prize-amount">400,000</div><div class="prize-unit">sats</div></div>
-      <div class="prize-card silver"><div class="prize-position">🥈</div><div class="prize-place">2do lugar</div><div class="prize-amount">250,000</div><div class="prize-unit">sats</div></div>
-      <div class="prize-card bronze"><div class="prize-position">🥉</div><div class="prize-place">3er lugar</div><div class="prize-amount">150,000</div><div class="prize-unit">sats</div></div>
-      <div class="prize-card"><div class="prize-position">4️⃣</div><div class="prize-place">4to lugar</div><div class="prize-amount">100,000</div><div class="prize-unit">sats</div></div>
-      <div class="prize-card"><div class="prize-position">5️⃣</div><div class="prize-place">5to lugar</div><div class="prize-amount">60,000</div><div class="prize-unit">sats</div></div>
-      <div class="prize-card"><div class="prize-position">6️⃣</div><div class="prize-place">6to lugar</div><div class="prize-amount">40,000</div><div class="prize-unit">sats</div></div>
-    </div>
-    <div class="prizes-total"><div class="prizes-total-label">Premio total de la hackathon</div><div class="prizes-total-amount">1,000,000</div><div class="prizes-total-unit">sats (~$600 USD)</div></div>
-  </div>
-</section>
-
+<!-- CTA -->
 <section class="cta-section">
-  <div class="container"><h2>¿Listo para empezar?</h2><p>Inscripciones abiertas desde el 7 de abril.</p><button class="btn btn-primary btn-large btn-glow" data-tally-open="9qDNEY" data-tally-layout="modal" data-tally-width="600">Inscribirme a IDENTITY 🔐</button></div>
+  <div class="container">
+    <h2>¿Listo para empezar?</h2>
+    <p>Inscripciones abiertas. ¡Anotate ahora!</p>
+    <button class="btn btn-primary btn-large btn-glow" id="ctaButton" data-tally-open="9qDNEY" data-tally-layout="modal" data-tally-width="600">
+      Inscribirme ⚡
+    </button>
+  </div>
 </section>
 
-<footer class="footer"><div class="container"><div class="footer-bottom"><p>© 2026 La Crypta · <a href="../hackathons.html">Ver todas las hackathons</a> · <a href="../index.html">Inicio</a></p></div></div></footer>
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2026 La Crypta · <a href="../hackathons.html">Ver todas las hackathons</a> · <a href="../index.html">Inicio</a></p>
+    </div>
+  </div>
+</footer>
 
+<!-- Scripts -->
 <script src="https://tally.so/widgets/embed.js"></script>
 <script>
-function toggleMenu() { document.getElementById('mobileMenu')?.classList.toggle('active'); document.body.classList.toggle('menu-open'); }
-window.addEventListener('scroll', () => { const navbar = document.querySelector('.navbar'); navbar.classList.toggle('scrolled', window.scrollY > 50); });
+function toggleMenu() {
+  document.getElementById('mobileMenu')?.classList.toggle('active');
+  document.body.classList.toggle('menu-open');
+}
+
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
 </script>
+
+<script>
+// ─────────────────────────────────────────────
+// Hackathon ID: extraído del nombre del archivo
+// ─────────────────────────────────────────────
+const HACKATHON_ID = (function() {
+  const filename = window.location.pathname.split('/').pop().replace('.html', '');
+  return filename || 'identity';
+})();
+
+// ─────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────
+function formatSats(n) {
+  return n.toLocaleString('es-AR');
+}
+
+function getDifficultyLabel(difficulty) {
+  const map = {
+    'Beginner': '⭐ Beginner',
+    'Intermediate': '⭐⭐ Intermediate',
+    'Advanced': '⭐⭐⭐ Advanced',
+    'Expert': '⭐⭐⭐⭐ Expert'
+  };
+  return map[difficulty] || difficulty;
+}
+
+function getPrizeCardClass(position) {
+  if (position === 1) return 'gold';
+  if (position === 2) return 'silver';
+  if (position === 3) return 'bronze';
+  return '';
+}
+
+function getPrizeEmoji(position) {
+  const emojis = { 1: '🥇', 2: '🥈', 3: '🥉' };
+  const nums = { 4: '4️⃣', 5: '5️⃣', 6: '6️⃣', 7: '7️⃣', 8: '8️⃣' };
+  return emojis[position] || nums[position] || `${position}°`;
+}
+
+function getPrizePlaceLabel(position) {
+  const labels = { 1: '1er lugar', 2: '2do lugar', 3: '3er lugar', 4: '4to lugar', 5: '5to lugar', 6: '6to lugar' };
+  return labels[position] || `${position}° lugar`;
+}
+
+function getCalendarItemStatus(dateStr) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const itemDate = new Date(dateStr + 'T00:00:00');
+  const diff = itemDate - today;
+  if (diff < 0) return 'completed';
+  if (diff < 7 * 24 * 60 * 60 * 1000) return 'active'; // dentro de los próximos 7 días
+  return '';
+}
+
+function getCalendarTagConfig(type, totalSats) {
+  const map = {
+    'apertura': { text: 'Inscripciones abiertas', cls: '' },
+    'pitch': { text: 'Pitch + Feedback', cls: '' },
+    'cierre': { text: 'Deadline inscripción', cls: 'deadline' },
+    'pitch-final': { text: 'Pitch Final', cls: '' },
+    'premios': { text: `${formatSats(totalSats)} sats en premios`, cls: 'prizes' }
+  };
+  return map[type] || { text: type, cls: '' };
+}
+
+function getMonthShort(dateStr) {
+  const months = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+  const d = new Date(dateStr + 'T00:00:00');
+  return months[d.getMonth()];
+}
+
+function getWeekdayShort(dateStr) {
+  const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const d = new Date(dateStr + 'T00:00:00');
+  return days[d.getDay()];
+}
+
+// ─────────────────────────────────────────────
+// Render: Premios
+// ─────────────────────────────────────────────
+function renderPrizes(distribution, totalSats) {
+  const grid = document.getElementById('prizesGrid');
+  const total = document.getElementById('prizesTotal');
+  const totalAmount = document.getElementById('prizesTotalAmount');
+  const sectionTitle = document.getElementById('prizesSectionTitle');
+
+  const formattedTotal = formatSats(totalSats);
+  if (sectionTitle) sectionTitle.textContent = `${formattedTotal} sats en juego`;
+
+  let html = '';
+  distribution.forEach(item => {
+    const cls = getPrizeCardClass(item.position);
+    const emoji = getPrizeEmoji(item.position);
+    const place = getPrizePlaceLabel(item.position);
+    html += `
+      <div class="prize-card ${cls}">
+        <div class="prize-position">${emoji}</div>
+        <div class="prize-place">${place}</div>
+        <div class="prize-amount">${formatSats(item.sats)}</div>
+        <div class="prize-unit">sats</div>
+      </div>
+    `;
+  });
+
+  grid.innerHTML = html;
+
+  if (totalAmount) totalAmount.textContent = formattedTotal;
+  if (total) total.style.display = '';
+}
+
+// ─────────────────────────────────────────────
+// Render: Calendario
+// ─────────────────────────────────────────────
+function renderCalendar(dates, totalSats, monthLabel) {
+  const grid = document.getElementById('calendarGrid');
+  const sectionTitle = document.getElementById('calendarSectionTitle');
+  if (sectionTitle) sectionTitle.textContent = monthLabel;
+
+  let html = '';
+  dates.forEach(item => {
+    const status = getCalendarItemStatus(item.date);
+    const monthShort = getMonthShort(item.date);
+    const weekday = getWeekdayShort(item.date);
+    const tag = getCalendarTagConfig(item.type, totalSats);
+
+    const youtubeBtn = item.youtube
+      ? `<a href="${item.youtube}" target="_blank" class="calendar-link">▶ Ver grabación</a>`
+      : '';
+
+    html += `
+      <div class="calendar-item ${status}">
+        <div class="calendar-date">
+          <span class="calendar-day">${item.day}</span>
+          <span class="calendar-month">${monthShort}</span>
+          <span class="calendar-weekday">${weekday}</span>
+        </div>
+        <div class="calendar-content">
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <span class="calendar-tag ${tag.cls}">${tag.text}</span>
+          ${youtubeBtn}
+        </div>
+      </div>
+    `;
+  });
+
+  grid.innerHTML = html;
+}
+
+// ─────────────────────────────────────────────
+// Render: Topics
+// ─────────────────────────────────────────────
+const TOPIC_ICONS = {
+  'Invoices & Payments': '⚡',
+  'Wallets & Keys': '👛',
+  'APIs & SDKs': '🔌',
+  'Dev Tools': '🛠️',
+  'Keys & Signing': '🔑',
+  'Profiles & Metadata': '👤',
+  'Relays': '📡',
+  'NIP-01 Basics': '📄',
+  'NIP-57 Zaps': '⚡',
+  'LNURL': '🔗',
+  'Value4Value': '💜',
+  'Social Payments': '💬',
+  'BTCPay Server': '🛒',
+  'Point of Sale': '💳',
+  'Subscriptions': '🔄',
+  'Checkout Flows': '✅',
+  'Blossom Protocol': '🌸',
+  'Media Hosting': '📸',
+  'CDN Decentralizado': '🌐',
+  'Monetización': '💰',
+  'Agentes Autónomos': '🤖',
+  'LLM + Lightning': '🧠',
+  'Workflows': '⚙️',
+  'NWC': '🔌',
+  'LND / CLN': '🏗️',
+  'Channel Management': '📊',
+  'Liquidity': '💧',
+  'Routing Fees': '💸',
+  'Integración Completa': '🌐',
+  'Deploy Production': '🚀',
+  'Testing E2E': '🧪',
+  'Launch': '🎯'
+};
+
+function renderTopics(topics, hackathonFocus) {
+  const grid = document.getElementById('topicsGrid');
+  const title = document.getElementById('topicsSectionTitle');
+  if (title) title.textContent = hackathonFocus;
+
+  if (!topics || topics.length === 0) {
+    grid.innerHTML = '<p style="color: rgba(255,255,255,0.5);">Sin topics definidos.</p>';
+    return;
+  }
+
+  let html = '';
+  topics.forEach(topic => {
+    const icon = TOPIC_ICONS[topic] || '📌';
+    html += `
+      <div class="topic-card">
+        <h4>${icon} ${topic}</h4>
+      </div>
+    `;
+  });
+
+  grid.innerHTML = html;
+}
+
+// ─────────────────────────────────────────────
+// Render: Hero
+// ─────────────────────────────────────────────
+function renderHero(hackathon, totalSats) {
+  const setEl = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+
+  setEl('hackathonNumber', `#${hackathon.number}`);
+  setEl('hackathonName', hackathon.name);
+  setEl('hackathonFocus', hackathon.focus);
+  setEl('hackathonDescription', hackathon.description);
+  setEl('hackathonDifficulty', getDifficultyLabel(hackathon.difficulty));
+  setEl('hackathonPrizeTotal', `${formatSats(totalSats)} sats`);
+  setEl('hackathonIcon', hackathon.icon);
+  setEl('hackathonBadgeText', `Hackathon #${hackathon.number} · ${hackathon.month} ${hackathon.year}`);
+
+  // Page title & meta
+  document.title = `${hackathon.name} — Lightning Hackathon #${hackathon.number} | La Crypta`;
+  const metaDesc = document.getElementById('pageDescription');
+  if (metaDesc) metaDesc.setAttribute('content', `${hackathon.description} ${hackathon.month} ${hackathon.year}.`);
+
+  // CTA button
+  const ctaBtn = document.getElementById('ctaButton');
+  if (ctaBtn) ctaBtn.textContent = `Inscribirme a ${hackathon.name} ⚡`;
+
+  // Projects section title
+  setEl('projectsSectionTitle', `Participando en ${hackathon.name}`);
+
+  // PR link
+  const prLink = document.getElementById('projectsPrLink');
+  if (prLink) prLink.href = `https://github.com/lacrypta/hackathons-2026/blob/main/data/projects/${HACKATHON_ID}.json`;
+}
+
+// ─────────────────────────────────────────────
+// Render: Proyectos
+// ─────────────────────────────────────────────
+async function loadProjects() {
+  const grid = document.getElementById('projectsGrid');
+  
+  try {
+    const response = await fetch(`/data/projects/${HACKATHON_ID}.json?v=` + Date.now());
+    if (!response.ok) throw new Error('No encontrado');
+    const data = await response.json();
+    
+    if (!data.projects || data.projects.length === 0) {
+      grid.innerHTML = buildPlaceholderCard();
+      return;
+    }
+    
+    const statusLabels = {
+      'official': '⚡ Oficial',
+      'submitted': 'Inscripto',
+      'building': '🔨 Construyendo',
+      'idea': '💡 Idea',
+      'finalist': '🏆 Finalista',
+      'winner': '👑 Ganador'
+    };
+    
+    const statusClasses = {
+      'official': 'featured',
+      'submitted': 'submitted',
+      'building': 'building',
+      'winner': 'winner',
+      'finalist': 'finalist'
+    };
+    
+    const order = ['official', 'winner', 'finalist', 'submitted', 'building', 'idea'];
+    data.projects.sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status));
+    
+    let html = '';
+    data.projects.forEach(project => {
+      const statusClass = statusClasses[project.status] || '';
+      const statusLabel = statusLabels[project.status] || project.status;
+      const repoUrl = project.repo || '#';
+      const demoUrl = project.demo || '';
+      
+      html += `
+        <a href="${repoUrl}" target="_blank" class="project-card ${statusClass}">
+          <div class="project-status">${statusLabel}</div>
+          <h3 class="project-name">${project.name}</h3>
+          <p class="project-description">${project.description}</p>
+          ${project.tech && project.tech.length > 0 ? `
+            <div class="project-tech">
+              ${project.tech.slice(0, 4).map(t => `<span>${t}</span>`).join('')}
+            </div>
+          ` : ''}
+          <div class="project-team">
+            ${project.team.map(m => `<span class="team-member">👤 ${m.name}</span>`).join('')}
+          </div>
+          <div class="project-links">
+            <span class="project-link">Ver en GitHub →</span>
+            ${demoUrl ? `<span class="project-link demo-link" onclick="event.preventDefault(); window.open('${demoUrl}', '_blank')">🌐 Demo</span>` : ''}
+          </div>
+        </a>
+      `;
+    });
+    
+    html += buildPlaceholderCard();
+    grid.innerHTML = html;
+    
+  } catch (error) {
+    console.error('Error loading projects:', error);
+    grid.innerHTML = buildPlaceholderCard();
+  }
+}
+
+function buildPlaceholderCard() {
+  return `
+    <div class="project-card placeholder">
+      <div class="placeholder-icon">➕</div>
+      <h3 class="project-name">Tu proyecto acá</h3>
+      <p class="project-description">Agregá tu proyecto haciendo un PR al repositorio.</p>
+      <a href="https://github.com/lacrypta/hackathons-2026/edit/main/data/projects/${HACKATHON_ID}.json" target="_blank" class="btn btn-outline btn-small">
+        Agregar proyecto
+      </a>
+    </div>
+  `;
+}
+
+// ─────────────────────────────────────────────
+// Main: cargar todo desde hackathons.json
+// ─────────────────────────────────────────────
+async function loadHackathonData() {
+  try {
+    const response = await fetch('/data/hackathons.json?v=' + Date.now());
+    if (!response.ok) throw new Error('No se pudo cargar hackathons.json');
+    const data = await response.json();
+
+    const hackathon = data.hackathons.find(h => h.id === HACKATHON_ID);
+    if (!hackathon) throw new Error(`Hackathon "${HACKATHON_ID}" no encontrada`);
+
+    const totalSats = data.program.prizePerHackathon;
+    const distribution = data.program.prizeDistribution;
+
+    renderHero(hackathon, totalSats);
+    renderPrizes(distribution, totalSats);
+    renderCalendar(hackathon.dates, totalSats, `${hackathon.month} ${hackathon.year}`);
+    renderTopics(hackathon.topics, hackathon.focus);
+
+  } catch (error) {
+    console.error('Error cargando datos de hackathon:', error);
+    const errMsg = `<p style="color: rgba(255,100,100,0.8); text-align:center; padding:20px;">Error cargando datos: ${error.message}</p>`;
+    ['prizesGrid', 'calendarGrid', 'topicsGrid'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = errMsg;
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadHackathonData();
+  loadProjects();
+});
+</script>
+
 </body>
 </html>
