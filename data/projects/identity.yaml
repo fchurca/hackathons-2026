@@ -1,0 +1,29 @@
+# Hackathon: IDENTITY — Abril 2026
+# Para agregar tu proyecto, hace un PR a este archivo agregando tu proyecto a la lista 'projects'.
+#
+# Campos requeridos: id, name, description, team, status
+# Campos opcionales: repo, demo, tech, submittedAt, pitched, pitched_final
+#
+# Status options: idea | building | submitted | finalist | winner | official
+# Team roles: Lead Dev | Dev | Designer | PM | Organizers
+
+hackathon: identity
+month: "Abril 2026"
+
+projects:
+  - id: nostr-starter
+    name: Nostr Starter Kit
+    description: "Template oficial para empezar. Keys, profiles, relays, NIP-01 basics."
+    team:
+      - name: La Crypta
+        github: lacrypta
+        role: Organizers
+    repo: https://github.com/lacrypta/nostr-starter
+    demo: ""
+    tech:
+      - Nostr
+      - NIP-01
+      - NDK
+      - Vite
+    status: official
+    submittedAt: "2026-04-01"
